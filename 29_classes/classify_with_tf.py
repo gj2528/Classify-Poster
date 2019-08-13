@@ -85,6 +85,8 @@ def prepare_data(data, img_dict, size=(150, 101)):
         except:
             pass
     print("DONE")
+    dataset = np.asarray(dataset)
+    y = np.asarray(y)
     #print("dataset:",dataset)
     #print("y:",y)
     print("label_dict:",label_dict)
@@ -131,31 +133,9 @@ def init_parameters():
     W4 = tf.get_variable("W4", [3, 3, 64, 64], initializer=tf.contrib.layers.xavier_initializer(seed=0))
     b4 = tf.get_variable("b4", [64, ], initializer=tf.zeros_initializer())
 
-    # W5 = tf.get_variable("W5", [3, 3, 32, 48], initializer=tf.contrib.layers.xavier_initializer(seed=0))
-    # b5 = tf.get_variable("b5", [48, ], initializer=tf.zeros_initializer())
-    # W6 = tf.get_variable("W6", [3, 3, 48, 48], initializer=tf.contrib.layers.xavier_initializer(seed=0))
-    # b6 = tf.get_variable("b6", [48, ], initializer=tf.zeros_initializer())
-    # W7 = tf.get_variable("W7", [3, 3, 48, 48], initializer=tf.contrib.layers.xavier_initializer(seed=0))
-    # b7 = tf.get_variable("b7", [48, ], initializer=tf.zeros_initializer())
-    #
-    # W8 = tf.get_variable("W8", [3, 3, 48, 64], initializer=tf.contrib.layers.xavier_initializer(seed=0))
-    # b8 = tf.get_variable("b8", [64, ], initializer=tf.zeros_initializer())
-    # W9 = tf.get_variable("W9", [3, 3, 64, 64], initializer=tf.contrib.layers.xavier_initializer(seed=0))
-    # b9 = tf.get_variable("b9", [64, ], initializer=tf.zeros_initializer())
-    # W10 = tf.get_variable("W10", [3, 3, 64, 64], initializer=tf.contrib.layers.xavier_initializer(seed=0))
-    # b10 = tf.get_variable("b10", [64, ], initializer=tf.zeros_initializer())
-    #
-    # W11 = tf.get_variable("W11", [3, 3, 64, 64], initializer=tf.contrib.layers.xavier_initializer(seed=0))
-    # b11 = tf.get_variable("b11", [64, ], initializer=tf.zeros_initializer())
-    # W12 = tf.get_variable("W12", [3, 3, 64, 64], initializer=tf.contrib.layers.xavier_initializer(seed=0))
-    # b12 = tf.get_variable("b12", [64, ], initializer=tf.zeros_initializer())
-    # W13 = tf.get_variable("W13", [3, 3, 64, 64], initializer=tf.contrib.layers.xavier_initializer(seed=0))
-    # b13 = tf.get_variable("b13", [64, ], initializer=tf.zeros_initializer())
+ 
 
-    parameters = {"W1": W1, "b1": b1, "W2": W2, "b2": b2, "W3": W3, "b3": b3, "W4": W4, "b4": b4
-        # , "W5": W5, "b5": b5, "W6": W6, "b6": b6, "W7": W7, "b7": b7, "W8": W8, "b8": b8, "W9": W9, "b9": b9, "W10": W10,
-        #           "b10": b10,"W11": W11, "b11": b11, "W12": W12, "b12": b12, "W13": W13, "b13": b13
-          }
+    parameters = {"W1": W1, "b1": b1, "W2": W2, "b2": b2, "W3": W3, "b3": b3, "W4": W4, "b4": b4}
 
     return parameters
 
@@ -172,29 +152,6 @@ def forward_propagation(X, parameters, keep_prob):
     W4 = parameters['W4']
     b4 = parameters['b4']
 
-    # W5 = parameters['W5']
-    # b5 = parameters['b5']
-    # W6 = parameters['W6']
-    # b6 = parameters['b6']
-    # W7 = parameters['W7']
-    # b7 = parameters['b7']
-    #
-    # W8 = parameters['W8']
-    # b8 = parameters['b8']
-    # W9 = parameters['W9']
-    # b9 = parameters['b9']
-    # W10 = parameters['W10']
-    # b10 = parameters['b10']
-    #
-    # W11 = parameters['W11']
-    # b11 = parameters['b11']
-    # W12 = parameters['W12']
-    # b12 = parameters['b12']
-    # W13 = parameters['W13']
-    # b13 = parameters['b13']
-
-    # print(X.shape)
-
     Z1 = tf.nn.bias_add(tf.nn.conv2d(X, W1, strides=[1, 1, 1, 1], padding="VALID"), b1)
     A1 = tf.nn.relu(Z1)
     Z2 = tf.nn.bias_add(tf.nn.conv2d(A1, W2, strides=[1, 1, 1, 1], padding="VALID"), b2)
@@ -210,30 +167,6 @@ def forward_propagation(X, parameters, keep_prob):
     P2 = tf.nn.max_pool(A4, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding="VALID")
     D2 = tf.nn.dropout(P2, keep_prob=keep_prob)
     print("p2"+str(P2.shape))
-
-    # Z5 = tf.nn.bias_add(tf.nn.conv2d(P2, W5, strides=[1, 1, 1, 1], padding="SAME"), b5)
-    # A5 = tf.nn.relu(Z5)
-    # Z6 = tf.nn.bias_add(tf.nn.conv2d(A5, W6, strides=[1, 1, 1, 1], padding="SAME"), b6)
-    # A6 = tf.nn.relu(Z6)
-    # Z7 = tf.nn.bias_add(tf.nn.conv2d(A6, W7, strides=[1, 1, 1, 1], padding="SAME"), b7)
-    # A7 = tf.nn.relu(Z7)
-    # P3 = tf.nn.max_pool(A7, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding="VALID")
-    #
-    # Z8 = tf.nn.bias_add(tf.nn.conv2d(P3, W8, strides=[1, 1, 1, 1], padding="SAME"), b8)
-    # A8 = tf.nn.relu(Z8)
-    # Z9 = tf.nn.bias_add(tf.nn.conv2d(Z8, W9, strides=[1, 1, 1, 1], padding="SAME"), b9)
-    # A9 = tf.nn.relu(Z9)
-    # Z10 = tf.nn.bias_add(tf.nn.conv2d(A9, W10, strides=[1, 1, 1, 1], padding="SAME"), b10)
-    # A10 = tf.nn.relu(Z10)
-    # P4 = tf.nn.max_pool(A10, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding="VALID")
-
-    # Z11 = tf.nn.bias_add(tf.nn.conv2d(P4, W11, strides=[1, 1, 1, 1], padding="SAME"), b11)
-    # A11 = tf.nn.relu(Z11)
-    # Z12 = tf.nn.bias_add(tf.nn.conv2d(Z11, W12, strides=[1, 1, 1, 1], padding="SAME"), b12)
-    # A12 = tf.nn.relu(Z12)
-    # Z13 = tf.nn.bias_add(tf.nn.conv2d(A12, W13, strides=[1, 1, 1, 1], padding="SAME"), b13)
-    # A13 = tf.nn.relu(Z13)
-    # P5 = tf.nn.max_pool(A13, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding="VALID")
 
     # f1
     F1 = tf.contrib.layers.flatten(D2)
@@ -263,13 +196,13 @@ def model(dataset, y, n_classes, SIZE, learning_rate, num_epochs, minibatch_size
 
     parameters = init_parameters()
 
-    X_train = np.array(dataset[:n])
-    Y_train = np.array(y[:n])
+    X_train = dataset[:n]
+    Y_train = y[:n]
 
     # predict
     n_test = 3000
-    X_test = np.array(dataset[n:n + n_test])
-    Y_test = np.array(y[n:n + n_test])
+    X_test = (dataset[n:n + n_test]
+    Y_test = y[n:n + n_test]
 
     Z16 = forward_propagation(X, parameters, keep_prob)
 
