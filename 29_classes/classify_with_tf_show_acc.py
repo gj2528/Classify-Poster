@@ -93,6 +93,8 @@ def prepare_data(data, img_dict, size=(150, 101)):
         except:
             pass
     print("DONE")
+    dataset = np.asarray(dataset)
+    y = np.asarray(y)
     #print("dataset:",dataset)
     print("y:",y)
     print("label_dict:",label_dict)
