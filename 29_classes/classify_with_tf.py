@@ -263,13 +263,13 @@ def model(dataset, y, n_classes, SIZE, learning_rate, num_epochs, minibatch_size
 
     parameters = init_parameters()
 
-    X_train = dataset[:n]
-    Y_train = y[:n]
+    X_train = np.array(dataset[:n])
+    Y_train = np.array(y[:n])
 
     # predict
     n_test = 3000
-    X_test = dataset[n:n + n_test]
-    Y_test = y[n:n + n_test]
+    X_test = np.array(dataset[n:n + n_test])
+    Y_test = np.array(y[n:n + n_test])
 
     Z16 = forward_propagation(X, parameters, keep_prob)
 
