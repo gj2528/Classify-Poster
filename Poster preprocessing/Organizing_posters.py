@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import numpy as np
 
-#genres = ['Action','Adventure', 'Animation', 'Biography','Documentary' , 'Comedy', 'Crime' , 'Drama' , 'Family',  'History', 'Horror', 'Thriller','Music','Musical', 'Romance', 'Sci-Fi',  'Sport',  'War']
-genres = ['Sci-Fi']
+genres = ['Action','Adventure', 'Animation', 'Biography','Documentary' , 'Comedy', 'Crime' , 'Drama' , 'Family',  'History', 'Horror', 'Thriller','Music','Musical', 'Romance', 'Sci-Fi',  'Sport',  'War']
+#genres = ['Sci-Fi']
 original_path = "data/"
 original_posters_file = ("posters/")
 
@@ -21,11 +21,16 @@ def organizing_posters():
         else:
             print(save_folder + ' 目录已存在')
         results = []
-        with open(original_path + genre + '.txt', 'r') as f:
-            for line in f:
-                str = line.strip('\n')
-                results.append(str)
-            print(results)
+        try:
+            with open(original_path + genre + '.txt', 'r') as f:
+                for line in f:
+                    str = line.strip('\n')
+                    results.append(str)
+                print(results)
+        except:
+            os.removedirs(save_folder)
+            print(save_folder + '删除成功')
+            pass
 
         for result in results:
             try:
