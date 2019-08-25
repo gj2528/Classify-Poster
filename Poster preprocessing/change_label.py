@@ -200,17 +200,18 @@ def prepare_data(data,  img_dict, size=(150, 101)):
             img = preprocess(img_dict[k], size)
             if img.shape != (150, 101, 3):
                 continue
-            dataset.append(img)
+
             if(len(gg)):
                 l = np.sum([np.eye(n_classes, dtype="uint8")[label_dict["word2idx"][s]]
                                                             for s in g], axis=0)#列方向上数字相加
                 #print('l',l)
+                dataset.append(img)
                 y.append(l)
                 ids.append(k)
         except:
             pass
     print("DONE")
-    #dataset = np.asarray(dataset)
+    dataset = np.asarray(dataset)
     y = np.asarray(y)
     print("dataset.type:",type(dataset))
     print("y.type:",type(y))
@@ -227,6 +228,7 @@ print('label_dict["idx2word"]',label_dict["idx2word"])
 print('label_dict["word2idx"]',label_dict["word2idx"])
 print('y',y)
 print('ids',ids)
+print('dataset.shape',dataset.shape)
 
 import csv
 import codecs
