@@ -1,0 +1,3 @@
+make_classify_txt.py是把id按种类分到各个对应的种类，写到各个对应的txt文件中
+merge_some_txt.py是把相似类组合在一起，减少种类，比如惊悚Thriller和恐怖Horror，就可以把惊悚都分类为恐怖
+Organizing_posters.py是把海报按之前分好的txt文件，把海报存入对应的文件夹
