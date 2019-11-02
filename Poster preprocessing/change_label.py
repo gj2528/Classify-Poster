@@ -160,7 +160,7 @@ def prepare_data(data,  img_dict, size=(150, 101)):
     label_dict = {"word2idx": {}, "idx2word": []}
     idx = 0
     genre_per_movie = data["Genre"].apply(lambda x: str(x).split("|"))
-    genre_per_movie = cut_label(genre_per_movie)
+    genre_per_movie = cut_label(genre_per_movie)  #加上这句代表改变为自己设置的标签，不加则是原始的标签
     print('genre_per_movie',genre_per_movie)
     for l in [g for d in genre_per_movie for g in d]:
         #print("l",l)
