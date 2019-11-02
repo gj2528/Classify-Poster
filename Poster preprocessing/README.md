@@ -1,4 +1,4 @@
-utils.py制作了只包括data和label的csv
+
 
 make_classify_txt.py是把id按种类分到各个对应的种类，写到各个对应的txt文件中
 
